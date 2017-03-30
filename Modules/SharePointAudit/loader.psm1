@@ -10,3 +10,5 @@
 
 . $PSScriptRoot\Add-SPAuditSharePointSnapin.ps1
 . $PSScriptRoot\Get-SPAuditFarmOverview.ps1
+. $PSScriptRoot\Get-SPAuditSharePointBuild.ps1
+. $PSScriptRoot\Get-SPAuditSharePointLicense.ps1

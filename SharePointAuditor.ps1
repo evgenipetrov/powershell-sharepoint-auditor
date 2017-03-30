@@ -12,7 +12,7 @@
 # add sharepoint pssnapin if it is not added to shell
 try
 {
-  Get-PSSnapin -Name Microsoft.SharePoint.PowerShell -ErrorAction Stop | Out-Null
+  $null = Get-PSSnapin -Name Microsoft.SharePoint.PowerShell -ErrorAction Stop
 }
 catch
 {
@@ -22,7 +22,7 @@ catch
 # add custom module to path
 if ($env:PSModulePath -notlike '*SharePointAudit*')
 {
-  $env:PSModulePath += ';C:\projects\powershell-sharepoint-auditor\Modules\'
+  $env:PSModulePath += ';C:\projects\powershell-sharepoint-auditor\'
 }
 
 # reload module to reflect module changes
@@ -33,31 +33,51 @@ if (Get-Module -Name SharePointAudit)
 
 $properties = @{
   n = 'Report Name'
-  e = { $_.ReportName }
+  e = {
+    $_.ReportName
+  }
 }, 
 @{
   n = 'Farm Name'
-  e = { $_.FarmName }
+  e = {
+    $_.FarmName
+  }
 }, 
 @{
   n = 'Installed SharePoint Version'
-  e = { $_.BuildVersion }
+  e = {
+    $_.BuildVersion
+  }
+}, 
+@{
+  n = 'Patch Level'
+  e = {
+    $_.PatchLevel
+  }
 }, 
 @{
   n = 'SharePoint SKU Edition'
-  e = { $_.SharePointEdition }
+  e = {
+    $_.SharePointLicense
+  }
 }, 
 @{
   n = 'Configuration Database'
-  e = { $_.ConfigurationDatabase }
+  e = {
+    $_.ConfigurationDatabase
+  }
 }, 
 @{
   n = 'Number of Servers in Farm'
-  e = { $_.FarmServerCount }
-},
+  e = {
+    $_.FarmServerCount
+  }
+}, 
 @{
   n = 'Report Generated on'
-  e = { $_.ReportCreatedOn }
+  e = {
+    $_.ReportCreatedOn
+  }
 }
 
 Get-SPAuditFarmOverview |
