@@ -1,6 +1,6 @@
 <#
     .SYNOPSIS
-    <A brief description of the script>
+    SharePoint 2013 Farm Audit Script
     .DESCRIPTION
     <A detailed description of the script>
     .PARAMETER <paramName>
@@ -22,7 +22,7 @@ catch
 # add custom module to path
 if ($env:PSModulePath -notlike '*SharePointAudit*')
 {
-  $env:PSModulePath += ';C:\projects\powershell-sharepoint-auditor\'
+  $env:PSModulePath += ';C:\projects\powershell-sharepoint-auditor\Modules'
 }
 
 # reload module to reflect module changes
@@ -83,5 +83,62 @@ $properties = @{
 Get-SPAuditFarmOverview |
 Select-Object -Property $properties  |
 Format-List
+
+$properties = @{
+  n = 'Server Name'
+  e = {
+    $_.ServerName
+  }
+},
+@{
+  n = 'Role'
+  e = {
+    $_.Role
+  }
+},
+@{
+  n = 'Operating System'
+  e = {
+    $_.OperatingSystem
+  }
+},
+@{
+  n = 'Memory[GB]'
+  e = {
+    $_.Memory / 1GB -as [int]
+  }
+}
+
+
+Get-SPAuditServersInFarm |
+Select-Object -Property $properties  |
+Format-Table -AutoSize
+
+
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.WebApplication
+  }
+},
+@{
+  n = 'Site Collection'
+  e = {
+    $_.SiteCollection
+  }
+},
+@{
+  n = 'Site Admins'
+  e = {
+    $_.SiteAdmins
+  }
+}
+
+
+Get-SPAuditWebApplicationsAndSiteCollections |
+Select-Object -Property $properties  |
+Format-Table -AutoSize
+
+
 
 
