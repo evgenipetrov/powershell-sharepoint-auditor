@@ -115,4 +115,30 @@ Select-Object -Property $properties  |
 Format-Table -AutoSize
 
 
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.WebApplication
+  }
+},
+@{
+  n = 'Site Collection'
+  e = {
+    $_.SiteCollection
+  }
+},
+@{
+  n = 'Site Admins'
+  e = {
+    $_.SiteAdmins
+  }
+}
+
+
+Get-SPAuditWebApplicationsAndSiteCollections |
+Select-Object -Property $properties  |
+Format-Table -AutoSize
+
+
+
 
