@@ -31,6 +31,8 @@ if (Get-Module -Name SharePointAudit)
   Remove-Module -Name SharePointAudit
 }
 
+#region 'farm overview'
+
 $properties = @{
   n = 'Report Name'
   e = {
@@ -84,6 +86,9 @@ Get-SPAuditFarmOverview |
 Select-Object -Property $properties  |
 Format-List
 
+#endregion
+
+#region 'servers in farm'
 $properties = @{
   n = 'Server Name'
   e = {
@@ -114,6 +119,9 @@ Get-SPAuditServersInFarm |
 Select-Object -Property $properties  |
 Format-Table -AutoSize
 
+#endregion
+
+#region 'web applications and site collections'
 
 $properties = @{
   n = 'Web Application'
@@ -139,7 +147,9 @@ Get-SPAuditWebApplicationsAndSiteCollections |
 Select-Object -Property $properties  |
 Format-Table -AutoSize
 
+#endregion
 
+#region 'content databases'
 $properties = @{
   n = 'Name'
   e = {
@@ -151,6 +161,8 @@ $properties = @{
 Get-SPAuditContentDatabases |
 Select-Object -Property $properties  |
 Format-Table -AutoSize
+
+#endregion
 
 
 
