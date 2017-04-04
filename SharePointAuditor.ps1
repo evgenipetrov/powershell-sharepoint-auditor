@@ -31,194 +31,247 @@ if (Get-Module -Name SharePointAudit)
   Remove-Module -Name SharePointAudit
 }
 
-#region 'farm overview'
+<#
 
-$properties = @{
-  n = 'Report Name'
-  e = {
+    #region 'farm overview'
+
+    $properties = @{
+    n = 'Report Name'
+    e = {
     $_.ReportName
-  }
-}, 
-@{
-  n = 'Farm Name'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Farm Name'
+    e = {
     $_.FarmName
-  }
-}, 
-@{
-  n = 'Installed SharePoint Version'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Installed SharePoint Version'
+    e = {
     $_.BuildVersion
-  }
-}, 
-@{
-  n = 'Patch Level'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Patch Level'
+    e = {
     $_.PatchLevel
-  }
-}, 
-@{
-  n = 'SharePoint SKU Edition'
-  e = {
+    }
+    }, 
+    @{
+    n = 'SharePoint SKU Edition'
+    e = {
     $_.SharePointLicense
-  }
-}, 
-@{
-  n = 'Configuration Database'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Configuration Database'
+    e = {
     $_.ConfigurationDatabase
-  }
-}, 
-@{
-  n = 'Number of Servers in Farm'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Number of Servers in Farm'
+    e = {
     $_.FarmServerCount
-  }
-}, 
-@{
-  n = 'Report Generated on'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Report Generated on'
+    e = {
     $_.ReportCreatedOn
-  }
-}
+    }
+    }
 
-Get-SPAuditFarmOverview |
-Select-Object -Property $properties  |
-Format-List
+    Get-SPAuditFarmOverview |
+    Select-Object -Property $properties  |
+    Format-List
 
-#endregion
+    #endregion
 
-#region 'servers in farm'
-$properties = @{
-  n = 'Server Name'
-  e = {
+    #region 'servers in farm'
+    $properties = @{
+    n = 'Server Name'
+    e = {
     $_.ServerName
-  }
-}, 
-@{
-  n = 'Role'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Role'
+    e = {
     $_.Role
-  }
-}, 
-@{
-  n = 'Operating System'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Operating System'
+    e = {
     $_.OperatingSystem
-  }
-}, 
-@{
-  n = 'Memory[GB]'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Memory[GB]'
+    e = {
     $_.Memory / 1GB -as [int]
-  }
-}
+    }
+    }
 
 
-Get-SPAuditServersInFarm |
-Select-Object -Property $properties  |
-Format-Table -AutoSize
+    Get-SPAuditServersInFarm |
+    Select-Object -Property $properties  |
+    Format-Table -AutoSize
 
-#endregion
+    #endregion
 
-#region 'web applications and site collections'
+    #region 'web applications and site collections'
 
-$properties = @{
-  n = 'Web Application'
-  e = {
+    $properties = @{
+    n = 'Web Application'
+    e = {
     $_.WebApplication
-  }
-}, 
-@{
-  n = 'Site Collection'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Site Collection'
+    e = {
     $_.SiteCollection
-  }
-}, 
-@{
-  n = 'Site Admins'
-  e = {
+    }
+    }, 
+    @{
+    n = 'Site Admins'
+    e = {
     $_.SiteAdmins
-  }
-}
+    }
+    }
 
 
-Get-SPAuditWebApplicationsAndSiteCollections |
-Select-Object -Property $properties  |
-Format-Table -AutoSize
+    Get-SPAuditWebApplicationsAndSiteCollections |
+    Select-Object -Property $properties  |
+    Format-Table -AutoSize
 
-#endregion
+    #endregion
 
-#region 'content databases'
-$properties = @{
-  n = 'Name'
-  e = {
+    #region 'content databases'
+    $properties = @{
+    n = 'Name'
+    e = {
     $_.Name
-  }
-}
+    }
+    }
 
 
-Get-SPAuditContentDatabases |
-Select-Object -Property $properties  |
-Format-Table -AutoSize
+    Get-SPAuditContentDatabases |
+    Select-Object -Property $properties  |
+    Format-Table -AutoSize
 
-#endregion
+    #endregion
 
-#region 'farm topology'
+    #region 'farm topology'
+    $properties = @{
+    n = 'Server Name'
+    e = {
+    $_.ServerName
+    }
+    }, 
+    @{
+    n = 'IP Address'
+    e = {
+    $_.IPAddress
+    }
+    }, 
+    @{
+    n = 'Role'
+    e = {
+    $_.Role
+    }
+    }, 
+    @{
+    n = 'Central Admin'
+    e = {
+    $_.HostsCentralAdmin
+    }
+    }
+
+    Get-SPAuditFarmTopology |
+    Select-Object -Property $properties
+    #endregion
+
+    #region 'site topology'
+
+    $properties = @{
+    n = 'Web Application'
+    e = {
+    $_.WebApplication
+    }
+    },
+    @{
+    n = 'Site Collection'
+    e = {
+    $_.SiteCollection
+    }
+    },
+    @{
+    n = 'Content Database'
+    e = {
+    $_.ContentDatabase
+    }
+    }
+
+    Get-SPAuditSiteTopology |
+    Select-Object -Property $properties |
+    Format-List -Property *
+    #endregion
+
+    #region 'search topology'
+#>
 $properties = @{
   n = 'Server Name'
   e = {
-    $_.ServerName
-  }
-}, 
-@{
-  n = 'IP Address'
-  e = {
-    $_.IPAddress
-  }
-}, 
-@{
-  n = 'Role'
-  e = {
-    $_.Role
-  }
-}, 
-@{
-  n = 'Central Admin'
-  e = {
-    $_.HostsCentralAdmin
-  }
-}
-
-Get-SPAuditFarmTopology |
-Select-Object -Property $properties
-#endregion
-
-#region 'site topology'
-
-$properties = @{
-  n = 'Web Application'
-  e = {
-    $_.WebApplication
+    $_.ComputerName
   }
 },
 @{
-  n = 'Site Collection'
+  n = 'Admin Component'
   e = {
-    $_.SiteCollection
+    $_.AdminComponent
   }
 },
 @{
-  n = 'Content Database'
+  n = 'Analytics Processing Component'
   e = {
-    $_.ContentDatabase
+    $_.AnalyticsProcessingComponent
+  }
+},
+@{
+  n = 'ContentProcessing Component'
+  e = {
+    $_.ContentProcessingComponent
+  }
+},
+@{
+  n = 'Crawl Component'
+  e = {
+    $_.CrawlComponent
+  }
+},
+@{
+  n = 'Index Component'
+  e = {
+    $_.IndexComponent
+  }
+},
+@{
+  n = 'Query Processing Component'
+  e = {
+    $_.QueryProcessingComponent
   }
 }
 
-Get-SPAuditSiteTopology |
+Get-SPAuditSearchTopology |
 Select-Object -Property $properties |
-Format-List -Property *
-#endregion
+Format-Table -Property * -AutoSize
+#endregion 'search topology'
+
 
 
 
