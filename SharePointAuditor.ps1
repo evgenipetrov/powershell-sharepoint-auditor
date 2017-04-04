@@ -164,6 +164,36 @@ Format-Table -AutoSize
 
 #endregion
 
+#region 'farm topology'
+$properties = @{
+  n = 'Server Name'
+  e = {
+    $_.ServerName
+  }
+},
+@{
+  n = 'IP Address'
+  e = {
+    $_.IPAddress
+  }
+},
+@{
+  n = 'Role'
+  e = {
+    $_.Role
+  }
+},
+@{
+  n = 'Central Admin'
+  e = {
+    $_.HostsCentralAdmin
+  }
+}
+
+Get-SPAuditFarmTopology |
+Select-Object -Property $properties
+#endregion
+
 
 
 

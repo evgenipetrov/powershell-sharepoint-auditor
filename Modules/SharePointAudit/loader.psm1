@@ -18,3 +18,4 @@
 . $PSScriptRoot\Get-SPAuditSharePointBuild.ps1
 . $PSScriptRoot\Get-SPAuditSharePointLicense.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationsAndSiteCollections.ps1
+. $PSScriptRoot\Get-SPAuditFarmTopology.ps1
