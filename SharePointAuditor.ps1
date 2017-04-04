@@ -140,5 +140,19 @@ Select-Object -Property $properties  |
 Format-Table -AutoSize
 
 
+$properties = @{
+  n = 'Name'
+  e = {
+    $_.Name
+  }
+}
+
+
+Get-SPAuditContentDatabases |
+Select-Object -Property $properties  |
+Format-Table -AutoSize
+
+
+
 
 

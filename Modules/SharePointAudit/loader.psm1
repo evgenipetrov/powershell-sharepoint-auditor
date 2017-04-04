@@ -12,6 +12,7 @@
 . $PSScriptRoot\Get-SPAuditComputerName.ps1
 . $PSScriptRoot\Get-SPAuditComputerNameByAlias.ps1
 . $PSScriptRoot\Get-SPAuditComputerNameByHost.ps1
+. $PSScriptRoot\Get-SPAuditContentDatabases.ps1
 . $PSScriptRoot\Get-SPAuditFarmOverview.ps1
 . $PSScriptRoot\Get-SPAuditServersInFarm.ps1
 . $PSScriptRoot\Get-SPAuditSharePointBuild.ps1
