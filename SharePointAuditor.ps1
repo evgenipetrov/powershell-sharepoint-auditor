@@ -94,19 +94,19 @@ $properties = @{
   e = {
     $_.ServerName
   }
-},
+}, 
 @{
   n = 'Role'
   e = {
     $_.Role
   }
-},
+}, 
 @{
   n = 'Operating System'
   e = {
     $_.OperatingSystem
   }
-},
+}, 
 @{
   n = 'Memory[GB]'
   e = {
@@ -128,13 +128,13 @@ $properties = @{
   e = {
     $_.WebApplication
   }
-},
+}, 
 @{
   n = 'Site Collection'
   e = {
     $_.SiteCollection
   }
-},
+}, 
 @{
   n = 'Site Admins'
   e = {
@@ -170,19 +170,19 @@ $properties = @{
   e = {
     $_.ServerName
   }
-},
+}, 
 @{
   n = 'IP Address'
   e = {
     $_.IPAddress
   }
-},
+}, 
 @{
   n = 'Role'
   e = {
     $_.Role
   }
-},
+}, 
 @{
   n = 'Central Admin'
   e = {
@@ -193,6 +193,33 @@ $properties = @{
 Get-SPAuditFarmTopology |
 Select-Object -Property $properties
 #endregion
+
+#region 'site topology'
+
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.WebApplication
+  }
+},
+@{
+  n = 'Site Collection'
+  e = {
+    $_.SiteCollection
+  }
+},
+@{
+  n = 'Content Database'
+  e = {
+    $_.ContentDatabase
+  }
+}
+
+Get-SPAuditSiteTopology |
+Select-Object -Property $properties |
+Format-List -Property *
+#endregion
+
 
 
 
