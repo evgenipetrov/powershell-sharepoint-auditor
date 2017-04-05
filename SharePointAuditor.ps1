@@ -335,4 +335,34 @@ Format-Table  -AutoSize
  
 #endregion 'general settings'
 
+#region 'workflow settings'
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+}, 
+@{
+  n = 'Allow Internal Users'
+  e = {
+    $_.AllowInternalUsers
+  }
+}, 
+@{
+  n = 'Allow External Users'
+  e = {
+    $_.AllowExternalUsers
+  }
+}
+
+Get-SPAuditWebApplicationWorkflowSettings|
+Select-Object -Property $properties |
+Format-Table -AutoSize
+#endregion 'workflow settings'
+
+
+
+
+
+
 
