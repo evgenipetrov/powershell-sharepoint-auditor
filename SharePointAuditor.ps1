@@ -390,6 +390,32 @@ Select-Object -Property $properties |
 Format-Table -AutoSize
 #endregion 'web applications features'
 
+#region 'web application managed paths'
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+},
+@{
+  n = 'Name'
+  e = {
+    $_.Name
+  }
+},
+@{
+  n = 'Prefix Type'
+  e = {
+    $_.PrefixType
+  }
+}
+
+Get-SPAuditWebApplicationsManagedPaths |
+Select-Object -Property $properties |
+Format-Table -AutoSize
+#endregion 'web application managed paths'
+
+
 
 
 

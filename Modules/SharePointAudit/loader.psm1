@@ -27,4 +27,5 @@
 . $PSScriptRoot\Get-SPAuditWebApplications.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationsAndSiteCollections.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationsFeatures.ps1
+. $PSScriptRoot\Get-SPAuditWebApplicationsManagedPaths.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationWorkflowSettings.ps1
