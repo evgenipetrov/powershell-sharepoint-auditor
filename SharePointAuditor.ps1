@@ -223,55 +223,69 @@ if (Get-Module -Name SharePointAudit)
     #endregion
 
     #region 'search topology'
-#>
-$properties = @{
-  n = 'Server Name'
-  e = {
+
+    $properties = @{
+    n = 'Server Name'
+    e = {
     $_.ComputerName
-  }
-},
-@{
-  n = 'Admin Component'
-  e = {
+    }
+    },
+    @{
+    n = 'Admin Component'
+    e = {
     $_.AdminComponent
-  }
-},
-@{
-  n = 'Analytics Processing Component'
-  e = {
+    }
+    },
+    @{
+    n = 'Analytics Processing Component'
+    e = {
     $_.AnalyticsProcessingComponent
-  }
-},
-@{
-  n = 'ContentProcessing Component'
-  e = {
+    }
+    },
+    @{
+    n = 'ContentProcessing Component'
+    e = {
     $_.ContentProcessingComponent
-  }
-},
-@{
-  n = 'Crawl Component'
-  e = {
+    }
+    },
+    @{
+    n = 'Crawl Component'
+    e = {
     $_.CrawlComponent
-  }
-},
-@{
-  n = 'Index Component'
-  e = {
+    }
+    },
+    @{
+    n = 'Index Component'
+    e = {
     $_.IndexComponent
-  }
-},
-@{
-  n = 'Query Processing Component'
-  e = {
+    }
+    },
+    @{
+    n = 'Query Processing Component'
+    e = {
     $_.QueryProcessingComponent
+    }
+    }
+
+    Get-SPAuditSearchTopology |
+    Select-Object -Property $properties |
+    Format-Table -Property * -AutoSize
+    #endregion 'search topology'
+#>
+
+#region 'services on server'
+
+$properties = @{
+  n = 'Service Name'
+  e = {
+    $_.ServiceName
   }
 }
 
-Get-SPAuditSearchTopology |
-Select-Object -Property $properties |
-Format-Table -Property * -AutoSize
-#endregion 'search topology'
+Get-SPAuditServicesOnServer |
+Select-Object -Property @{Name="Service Name" ; Expression={$_.ServiceName}},* -ExcludeProperty ServiceName
 
+#endregion 'services on server'
 
 
 

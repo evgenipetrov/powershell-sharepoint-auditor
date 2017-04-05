@@ -17,6 +17,7 @@
 . $PSScriptRoot\Get-SPAuditFarmTopology.ps1
 . $PSScriptRoot\Get-SPAuditSearchTopology.ps1
 . $PSScriptRoot\Get-SPAuditServersInFarm.ps1
+. $PSScriptRoot\Get-SPAuditServicesOnServer.ps1
 . $PSScriptRoot\Get-SPAuditSharePointBuild.ps1
 . $PSScriptRoot\Get-SPAuditSharePointLicense.ps1
 . $PSScriptRoot\Get-SPAuditSiteTopology.ps1
