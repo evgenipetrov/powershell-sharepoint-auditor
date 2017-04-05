@@ -9,6 +9,7 @@
 # LOADING ALL FUNCTION DEFINITIONS:
 
 . $PSScriptRoot\Add-SPAuditSharePointSnapin.ps1
+. $PSScriptRoot\Get-APAuditSelfServiceSiteCreation.ps1
 . $PSScriptRoot\Get-SPAuditComputerName.ps1
 . $PSScriptRoot\Get-SPAuditComputerNameByAlias.ps1
 . $PSScriptRoot\Get-SPAuditComputerNameByHost.ps1
