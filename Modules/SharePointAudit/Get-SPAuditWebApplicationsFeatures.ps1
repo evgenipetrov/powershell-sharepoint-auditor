@@ -3,7 +3,7 @@
   $features = Get-SPFeature | Where-Object -FilterScript {
     $_.Scope -eq 'WebApplication'
   }
-  $webApplications = Get-SPWebApplication
+  $webApplications = Get-SPWebApplication -IncludeCentralAdministration
   
   foreach ($webApplication in $webApplications)
   {
