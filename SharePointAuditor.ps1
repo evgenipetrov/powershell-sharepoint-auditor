@@ -272,7 +272,6 @@ if (Get-Module -Name SharePointAudit)
     Format-Table -Property * -AutoSize
     #endregion 'search topology'
 
-
     #region 'services on server'
 
     $properties = @{
@@ -286,32 +285,54 @@ if (Get-Module -Name SharePointAudit)
     Select-Object -Property $properties,* -ExcludeProperty ServiceName
 
     #endregion 'services on server'
+    
+    #region 'web applications list'
+    $properties = @{
+    n = 'Display Name'
+    e = {
+    $_.DisplayName
+    }
+    }, 
+    @{
+    n = 'Url'
+    e = {
+    $_.Url
+    }
+    }
 
+    Get-SPAuditWebApplications |
+    Select-Object -Property $properties |
+    Format-Table -AutoSize
 
+    #endregion 'web applications list'
+    
+#>
 
+#region 'general settings'
 
-#region 'web applications list'
 $properties = @{
-  n = 'Display Name'
+  n = 'Web Application'
   e = {
     $_.DisplayName
   }
 }, 
 @{
-  n = 'Url'
+  n = 'Default Time Zone'
   e = {
-    $_.Url
+    $_.DefaultTimeZone
+  }
+}, 
+@{
+  n = 'Default Quota Template'
+  e = {
+    $_.DefaultQuotaTemplate
   }
 }
 
-Get-SPAuditWebApplications |
+Get-SPAuditWebApplicationGeneralSettings | 
 Select-Object -Property $properties |
-Format-Table -AutoSize
-
-#endregion 'web applications list'
-
-
-#>
-
+Format-Table  -AutoSize
+ 
+#endregion 'general settings'
 
 
