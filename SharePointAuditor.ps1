@@ -355,10 +355,40 @@ $properties = @{
   }
 }
 
-Get-SPAuditWebApplicationWorkflowSettings|
+Get-SPAuditWebApplicationWorkflowSettings |
 Select-Object -Property $properties |
 Format-Table -AutoSize
 #endregion 'workflow settings'
+
+#region 'web applications features'
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+}, 
+@{
+  n = 'Feature Name'
+  e = {
+    $_.FeatureName
+  }
+}, 
+@{
+  n = 'Compatibility Level'
+  e = {
+    $_.CompatibilityLevel
+  }
+}, 
+@{
+  n = 'Active'
+  e = {
+    $_.IsActive
+  }
+}
+Get-SPAuditWebApplicationsFeatures |
+Select-Object -Property $properties |
+Format-Table -AutoSize
+#endregion 'web applications features'
 
 
 
