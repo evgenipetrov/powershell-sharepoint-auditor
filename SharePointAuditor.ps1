@@ -271,24 +271,47 @@ if (Get-Module -Name SharePointAudit)
     Select-Object -Property $properties |
     Format-Table -Property * -AutoSize
     #endregion 'search topology'
-#>
 
-#region 'services on server'
 
-$properties = @{
-  n = 'Service Name'
-  e = {
+    #region 'services on server'
+
+    $properties = @{
+    n = 'Service Name'
+    e = {
     $_.ServiceName
+    }
+    }
+
+    Get-SPAuditServicesOnServer |
+    Select-Object -Property $properties,* -ExcludeProperty ServiceName
+
+    #endregion 'services on server'
+
+
+
+
+#region 'web applications list'
+$properties = @{
+  n = 'Display Name'
+  e = {
+    $_.DisplayName
+  }
+}, 
+@{
+  n = 'Url'
+  e = {
+    $_.Url
   }
 }
 
-Get-SPAuditServicesOnServer |
-Select-Object -Property @{Name="Service Name" ; Expression={$_.ServiceName}},* -ExcludeProperty ServiceName
+Get-SPAuditWebApplications |
+Select-Object -Property $properties |
+Format-Table -AutoSize
 
-#endregion 'services on server'
+#endregion 'web applications list'
 
 
-
+#>
 
 
 
