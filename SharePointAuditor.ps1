@@ -439,6 +439,29 @@ Select-Object -Property $properties|
 Format-Table -AutoSize
 #endregion 'self service site creation'
 
+#region 'web part security
+ $properties = @{
+   n='Web Application'
+   e={$_.DisplayName}
+ },
+ @{
+   n='Online Web Part Gallery'
+   e={$_.OnlineWebPartGallery}
+ },
+ @{
+   n='Web Part Connections'
+   e={$_.WebPartConnections}
+ },
+ @{
+   n='Scriptable Web Parts'
+   e={$_.ScriptableWebParts}
+ }
+
+Get-SPAuditWebApplicationWebPartSecurity|
+Select-Object -Property $properties|
+Format-Table -AutoSize
+#endregion 'web part security
+
 
 
 
