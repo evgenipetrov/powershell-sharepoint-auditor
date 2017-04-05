@@ -416,6 +416,31 @@ Format-Table -AutoSize
 #endregion 'web application managed paths'
 
 
+#region 'self service site creation'
+ $properties = @{
+   n='Web Application'
+   e={$_.DisplayName}
+ },
+ @{
+   n='Url'
+   e={$_.Url}
+ },
+ @{
+   n='Allowed'
+   e={$_.Allowed}
+ },
+ @{
+   n='Require Secondary Contact'
+   e={$_.RequireSecondaryContact}
+ }
+
+Get-APAuditSelfServiceSiteCreation|
+Select-Object -Property $properties|
+Format-Table -AutoSize
+#endregion 'self service site creation'
+
+
+
 
 
 
