@@ -20,7 +20,7 @@ catch
 }
 
 # add custom module to path
-if ($env:PSModulePath -notlike '*SharePointAudit*')
+if ($env:PSModulePath -notlike "*$PSScriptRoot*")
 {
   $env:PSModulePath += ';C:\projects\powershell-sharepoint-auditor\Modules'
 }
@@ -31,280 +31,280 @@ if (Get-Module -Name SharePointAudit)
   Remove-Module -Name SharePointAudit
 }
 
-<#
 
-    #region 'farm overview'
 
-    $properties = @{
-    n = 'Report Name'
-    e = {
+#region 'farm overview'
+
+$properties = @{
+  n = 'Report Name'
+  e = {
     $_.ReportName
-    }
-    }, 
-    @{
-    n = 'Farm Name'
-    e = {
+  }
+}, 
+@{
+  n = 'Farm Name'
+  e = {
     $_.FarmName
-    }
-    }, 
-    @{
-    n = 'Installed SharePoint Version'
-    e = {
+  }
+}, 
+@{
+  n = 'Installed SharePoint Version'
+  e = {
     $_.BuildVersion
-    }
-    }, 
-    @{
-    n = 'Patch Level'
-    e = {
+  }
+}, 
+@{
+  n = 'Patch Level'
+  e = {
     $_.PatchLevel
-    }
-    }, 
-    @{
-    n = 'SharePoint SKU Edition'
-    e = {
+  }
+}, 
+@{
+  n = 'SharePoint SKU Edition'
+  e = {
     $_.SharePointLicense
-    }
-    }, 
-    @{
-    n = 'Configuration Database'
-    e = {
+  }
+}, 
+@{
+  n = 'Configuration Database'
+  e = {
     $_.ConfigurationDatabase
-    }
-    }, 
-    @{
-    n = 'Number of Servers in Farm'
-    e = {
+  }
+}, 
+@{
+  n = 'Number of Servers in Farm'
+  e = {
     $_.FarmServerCount
-    }
-    }, 
-    @{
-    n = 'Report Generated on'
-    e = {
+  }
+}, 
+@{
+  n = 'Report Generated on'
+  e = {
     $_.ReportCreatedOn
-    }
-    }
+  }
+}
 
-    Get-SPAuditFarmOverview |
-    Select-Object -Property $properties  |
-    Format-List
+Get-SPAuditFarmOverview |
+Select-Object -Property $properties  |
+Format-List
 
-    #endregion
+#endregion
 
-    #region 'servers in farm'
-    $properties = @{
-    n = 'Server Name'
-    e = {
+#region 'servers in farm'
+$properties = @{
+  n = 'Server Name'
+  e = {
     $_.ServerName
-    }
-    }, 
-    @{
-    n = 'Role'
-    e = {
+  }
+}, 
+@{
+  n = 'Role'
+  e = {
     $_.Role
-    }
-    }, 
-    @{
-    n = 'Operating System'
-    e = {
+  }
+}, 
+@{
+  n = 'Operating System'
+  e = {
     $_.OperatingSystem
-    }
-    }, 
-    @{
-    n = 'Memory[GB]'
-    e = {
+  }
+}, 
+@{
+  n = 'Memory[GB]'
+  e = {
     $_.Memory / 1GB -as [int]
-    }
-    }
+  }
+}
 
 
-    Get-SPAuditServersInFarm |
-    Select-Object -Property $properties  |
-    Format-Table -AutoSize
+Get-SPAuditServersInFarm |
+Select-Object -Property $properties  |
+Format-Table -AutoSize
 
-    #endregion
+#endregion
 
-    #region 'web applications and site collections'
+#region 'web applications and site collections'
 
-    $properties = @{
-    n = 'Web Application'
-    e = {
+$properties = @{
+  n = 'Web Application'
+  e = {
     $_.WebApplication
-    }
-    }, 
-    @{
-    n = 'Site Collection'
-    e = {
+  }
+}, 
+@{
+  n = 'Site Collection'
+  e = {
     $_.SiteCollection
-    }
-    }, 
-    @{
-    n = 'Site Admins'
-    e = {
+  }
+}, 
+@{
+  n = 'Site Admins'
+  e = {
     $_.SiteAdmins
-    }
-    }
+  }
+}
 
 
-    Get-SPAuditWebApplicationsAndSiteCollections |
-    Select-Object -Property $properties  |
-    Format-Table -AutoSize
+Get-SPAuditWebApplicationsAndSiteCollections |
+Select-Object -Property $properties  |
+Format-Table -AutoSize
 
-    #endregion
+#endregion
 
-    #region 'content databases'
-    $properties = @{
-    n = 'Name'
-    e = {
+#region 'content databases'
+$properties = @{
+  n = 'Name'
+  e = {
     $_.Name
-    }
-    }
+  }
+}
 
 
-    Get-SPAuditContentDatabases |
-    Select-Object -Property $properties  |
-    Format-Table -AutoSize
+Get-SPAuditContentDatabases |
+Select-Object -Property $properties  |
+Format-Table -AutoSize
 
-    #endregion
+#endregion
 
-    #region 'farm topology'
-    $properties = @{
-    n = 'Server Name'
-    e = {
+#region 'farm topology'
+$properties = @{
+  n = 'Server Name'
+  e = {
     $_.ServerName
-    }
-    }, 
-    @{
-    n = 'IP Address'
-    e = {
+  }
+}, 
+@{
+  n = 'IP Address'
+  e = {
     $_.IPAddress
-    }
-    }, 
-    @{
-    n = 'Role'
-    e = {
+  }
+}, 
+@{
+  n = 'Role'
+  e = {
     $_.Role
-    }
-    }, 
-    @{
-    n = 'Central Admin'
-    e = {
+  }
+}, 
+@{
+  n = 'Central Admin'
+  e = {
     $_.HostsCentralAdmin
-    }
-    }
+  }
+}
 
-    Get-SPAuditFarmTopology |
-    Select-Object -Property $properties
-    #endregion
+Get-SPAuditFarmTopology |
+Select-Object -Property $properties
+#endregion
 
-    #region 'site topology'
+#region 'site topology'
 
-    $properties = @{
-    n = 'Web Application'
-    e = {
+$properties = @{
+  n = 'Web Application'
+  e = {
     $_.WebApplication
-    }
-    },
-    @{
-    n = 'Site Collection'
-    e = {
+  }
+}, 
+@{
+  n = 'Site Collection'
+  e = {
     $_.SiteCollection
-    }
-    },
-    @{
-    n = 'Content Database'
-    e = {
+  }
+}, 
+@{
+  n = 'Content Database'
+  e = {
     $_.ContentDatabase
-    }
-    }
+  }
+}
 
-    Get-SPAuditSiteTopology |
-    Select-Object -Property $properties |
-    Format-List -Property *
-    #endregion
+Get-SPAuditSiteTopology |
+Select-Object -Property $properties |
+Format-List -Property *
+#endregion
 
-    #region 'search topology'
+#region 'search topology'
 
-    $properties = @{
-    n = 'Server Name'
-    e = {
+$properties = @{
+  n = 'Server Name'
+  e = {
     $_.ComputerName
-    }
-    },
-    @{
-    n = 'Admin Component'
-    e = {
+  }
+}, 
+@{
+  n = 'Admin Component'
+  e = {
     $_.AdminComponent
-    }
-    },
-    @{
-    n = 'Analytics Processing Component'
-    e = {
+  }
+}, 
+@{
+  n = 'Analytics Processing Component'
+  e = {
     $_.AnalyticsProcessingComponent
-    }
-    },
-    @{
-    n = 'ContentProcessing Component'
-    e = {
+  }
+}, 
+@{
+  n = 'ContentProcessing Component'
+  e = {
     $_.ContentProcessingComponent
-    }
-    },
-    @{
-    n = 'Crawl Component'
-    e = {
+  }
+}, 
+@{
+  n = 'Crawl Component'
+  e = {
     $_.CrawlComponent
-    }
-    },
-    @{
-    n = 'Index Component'
-    e = {
+  }
+}, 
+@{
+  n = 'Index Component'
+  e = {
     $_.IndexComponent
-    }
-    },
-    @{
-    n = 'Query Processing Component'
-    e = {
+  }
+}, 
+@{
+  n = 'Query Processing Component'
+  e = {
     $_.QueryProcessingComponent
-    }
-    }
+  }
+}
 
-    Get-SPAuditSearchTopology |
-    Select-Object -Property $properties |
-    Format-Table -Property * -AutoSize
-    #endregion 'search topology'
+Get-SPAuditSearchTopology |
+Select-Object -Property $properties |
+Format-Table -Property * -AutoSize
+#endregion 'search topology'
 
-    #region 'services on server'
+#region 'services on server'
 
-    $properties = @{
-    n = 'Service Name'
-    e = {
+$properties = @{
+  n = 'Service Name'
+  e = {
     $_.ServiceName
-    }
-    }
+  }
+}
 
-    Get-SPAuditServicesOnServer |
-    Select-Object -Property $properties,* -ExcludeProperty ServiceName
+Get-SPAuditServicesOnServer |
+Select-Object -Property $properties, * -ExcludeProperty ServiceName
 
-    #endregion 'services on server'
+#endregion 'services on server'
     
-    #region 'web applications list'
-    $properties = @{
-    n = 'Display Name'
-    e = {
+#region 'web applications list'
+$properties = @{
+  n = 'Display Name'
+  e = {
     $_.DisplayName
-    }
-    }, 
-    @{
-    n = 'Url'
-    e = {
+  }
+}, 
+@{
+  n = 'Url'
+  e = {
     $_.Url
-    }
-    }
+  }
+}
 
-    Get-SPAuditWebApplications |
-    Select-Object -Property $properties |
-    Format-Table -AutoSize
+Get-SPAuditWebApplications |
+Select-Object -Property $properties |
+Format-Table -AutoSize
 
-    #endregion 'web applications list'
+#endregion 'web applications list'
     
 #>
 
@@ -334,6 +334,73 @@ Select-Object -Property $properties |
 Format-Table  -AutoSize
  
 #endregion 'general settings'
+
+#region 'Resource Throttling'
+$properties = @{
+  n = 'Display Name'
+  e = {
+    $_.DisplayName
+  }
+}, 
+@{
+  n = 'View Threshold'
+  e = {
+    $_.MaxItemsPerThrottledOperation
+  }
+},
+@{
+  n = 'View Threshold Admins'
+  e = {
+  $_.MaxItemsPerThrottledOperationOverride
+  }
+},
+@{
+  n = 'API Override'
+  e = {
+  $_.AllowOMCodeOverrideThrottleSettings
+  }
+},
+@{
+  n = 'Lookup Threshold'
+  e = {
+  $_.MaxQueryLookupFields
+  }
+},
+@{
+  n = 'Large Queries Window'
+  e = {
+  $_.UnthrottledPrivilegedOperationWindowEnabled
+  }
+},
+@{
+  n = 'Permission Threshold'
+  e = {
+  $_.MaxUniquePermScopesPerList
+  }
+},
+@{
+  n = 'Back. Comp. Event Handlers'
+  e = {
+  $_.IsBackwardsCompatible
+  }
+},
+@{
+  n = 'Monitor HTTP Requests'
+  e = {
+  $_.PerformThrottle
+  }
+},
+@{
+  n = 'Delete Change Log'
+  e = {
+  $_.Days
+  }
+}
+Get-SPAuditWebApplicationsResourceThrottling |
+Select-Object -Property $properties |
+Format-Table -AutoSize
+
+#endregion 'Resource Throttling'
 
 #region 'workflow settings'
 $properties = @{
@@ -396,13 +463,13 @@ $properties = @{
   e = {
     $_.DisplayName
   }
-},
+}, 
 @{
   n = 'Name'
   e = {
     $_.Name
   }
-},
+}, 
 @{
   n = 'Prefix Type'
   e = {
@@ -417,22 +484,30 @@ Format-Table -AutoSize
 
 
 #region 'self service site creation'
- $properties = @{
-   n='Web Application'
-   e={$_.DisplayName}
- },
- @{
-   n='Url'
-   e={$_.Url}
- },
- @{
-   n='Allowed'
-   e={$_.Allowed}
- },
- @{
-   n='Require Secondary Contact'
-   e={$_.RequireSecondaryContact}
- }
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+}, 
+@{
+  n = 'Url'
+  e = {
+    $_.Url
+  }
+}, 
+@{
+  n = 'Allowed'
+  e = {
+    $_.Allowed
+  }
+}, 
+@{
+  n = 'Require Secondary Contact'
+  e = {
+    $_.RequireSecondaryContact
+  }
+}
 
 Get-APAuditSelfServiceSiteCreation|
 Select-Object -Property $properties|
@@ -440,22 +515,30 @@ Format-Table -AutoSize
 #endregion 'self service site creation'
 
 #region 'web part security
- $properties = @{
-   n='Web Application'
-   e={$_.DisplayName}
- },
- @{
-   n='Online Web Part Gallery'
-   e={$_.OnlineWebPartGallery}
- },
- @{
-   n='Web Part Connections'
-   e={$_.WebPartConnections}
- },
- @{
-   n='Scriptable Web Parts'
-   e={$_.ScriptableWebParts}
- }
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+}, 
+@{
+  n = 'Online Web Part Gallery'
+  e = {
+    $_.OnlineWebPartGallery
+  }
+}, 
+@{
+  n = 'Web Part Connections'
+  e = {
+    $_.WebPartConnections
+  }
+}, 
+@{
+  n = 'Scriptable Web Parts'
+  e = {
+    $_.ScriptableWebParts
+  }
+}
 
 Get-SPAuditWebApplicationWebPartSecurity|
 Select-Object -Property $properties|
