@@ -347,53 +347,53 @@ $properties = @{
   e = {
     $_.MaxItemsPerThrottledOperation
   }
-},
+}, 
 @{
   n = 'View Threshold Admins'
   e = {
-  $_.MaxItemsPerThrottledOperationOverride
+    $_.MaxItemsPerThrottledOperationOverride
   }
-},
+}, 
 @{
   n = 'API Override'
   e = {
-  $_.AllowOMCodeOverrideThrottleSettings
+    $_.AllowOMCodeOverrideThrottleSettings
   }
-},
+}, 
 @{
   n = 'Lookup Threshold'
   e = {
-  $_.MaxQueryLookupFields
+    $_.MaxQueryLookupFields
   }
-},
+}, 
 @{
   n = 'Large Queries Window'
   e = {
-  $_.UnthrottledPrivilegedOperationWindowEnabled
+    $_.UnthrottledPrivilegedOperationWindowEnabled
   }
-},
+}, 
 @{
   n = 'Permission Threshold'
   e = {
-  $_.MaxUniquePermScopesPerList
+    $_.MaxUniquePermScopesPerList
   }
-},
+}, 
 @{
   n = 'Back. Comp. Event Handlers'
   e = {
-  $_.IsBackwardsCompatible
+    $_.IsBackwardsCompatible
   }
-},
+}, 
 @{
   n = 'Monitor HTTP Requests'
   e = {
-  $_.PerformThrottle
+    $_.PerformThrottle
   }
-},
+}, 
 @{
   n = 'Delete Change Log'
   e = {
-  $_.Days
+    $_.Days
   }
 }
 Get-SPAuditWebApplicationsResourceThrottling |
@@ -544,6 +544,7 @@ Get-SPAuditWebApplicationWebPartSecurity|
 Select-Object -Property $properties|
 Format-Table -AutoSize
 #endregion 'web part security
+
 
 
 
