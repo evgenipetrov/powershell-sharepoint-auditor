@@ -710,6 +710,44 @@ Select-Object -Property $properties |
 Format-Table -AutoSize
 #endregion 'object cache accounts
 
+#region 'site collections list'
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.WebApplication
+  }
+},
+@{
+  n = 'Title'
+  e = {
+    $_.Title
+  }
+},
+@{
+  n = 'Url'
+  e = {
+    $_.Url
+  }
+},
+@{
+  n = 'Content Database'
+  e = {
+    $_.ContentDatabase
+  }
+},
+@{
+  n = 'Owners'
+  e = {
+    $_.Owners
+  }
+}
+Get-SPAuditSiteCollectionsList |
+Select-Object -Property $properties |
+Format-Table -AutoSize 
+#endregion 'site collections list'
+
+
+
 
 
 
