@@ -18,6 +18,7 @@
 . $PSScriptRoot\Get-SPAuditFarmOverview.ps1
 . $PSScriptRoot\Get-SPAuditFarmTopology.ps1
 . $PSScriptRoot\Get-SPAuditIisSettings.ps1
+. $PSScriptRoot\Get-SPAuditObjectCacheAccounts.ps1
 . $PSScriptRoot\Get-SPAuditSearchTopology.ps1
 . $PSScriptRoot\Get-SPAuditServersInFarm.ps1
 . $PSScriptRoot\Get-SPAuditServicesOnServer.ps1
