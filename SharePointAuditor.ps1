@@ -557,19 +557,19 @@ $properties = @{
   e = {
     $_.UserDisplayName
   }
-},
+}, 
 @{
   n = 'Username'
   e = {
     $_.Username
   }
-},
+}, 
 @{
   n = 'Policy Role Bindings'
   e = {
     $_.PolicyRoleBindings
   }
-},
+}, 
 @{
   n = 'SystemUser'
   e = {
@@ -593,13 +593,13 @@ $properties = @{
   e = {
     $_.InternalUrl
   }
-},
+}, 
 @{
   n = 'Zone'
   e = {
     $_.Zone
   }
-},
+}, 
 @{
   n = 'Url'
   e = {
@@ -611,10 +611,69 @@ Select-Object -Property $properties |
 Format-Table -AutoSize
 
 
-
-
-
 #endregion alternate access mappings
+
+#region 'IIS settings'
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+},
+@{
+  n = 'Url'
+  e = {
+    $_.Url
+  }
+}, 
+@{
+  n = 'Zone'
+  e = {
+    $_.Zone
+  }
+}, 
+@{
+  n = 'Authentication'
+  e = {
+    $_.Authentication
+  }
+}, 
+@{
+  n = 'Application Pool Name'
+  e = {
+    $_.ApplicationPoolName
+  }
+}, 
+@{
+  n = 'Application Pool Identity'
+  e = {
+    $_.ApplicationPoolIdentity
+  }
+}, 
+@{
+  n = 'SSL'
+  e = {
+    $_.SSL
+  }
+}, 
+@{
+  n = 'Claims Auth'
+  e = {
+    $_.ClaimsAuth
+  }
+}, 
+@{
+  n = 'CEIP'
+  e = {
+    $_.CEIP
+  }
+}
+Get-SPAuditIISSettings |
+Select-Object -Property $properties |
+Format-Table -AutoSize
+#endregion 'IIS settings'
+
+
 
 
 
