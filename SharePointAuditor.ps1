@@ -790,6 +790,55 @@ Select-Object -Property $properties |
 Format-Table -AutoSize 
 #endregion 'site collection usage and properties'
 
+#region 'quota templates'
+$properties = @{
+  n = 'Template Name'
+  e = {
+    $_.TemplateName
+  }
+},
+@{
+  n = 'Storage Maximum Level[MB]'
+  e = {
+    $_.StorageMaximumLevel/1MB -as [int]
+  }
+},
+@{
+  n = 'Storage Warning Level[MB]'
+  e = {
+    $_.StorageWarningLevel/1MB -as [int]
+  }
+},
+@{
+  n = 'Invited User Maximum Level'
+  e = {
+    $_.InvitedUserMaximumLevel
+  }
+},
+@{
+  n = 'User Code Maximum Level'
+  e = {
+    $_.UserCodeMaximumLevel
+  }
+},
+@{
+  n = 'User Code Warning Level'
+  e = {
+    $_.UserCodeWarningLevel
+  }
+},
+@{
+  n = 'Warning Level Email'
+  e = {
+    $_.WarningLevelEmail
+  }
+}
+
+Get-SPAuditQuotaTemplates  |
+Select-Object -Property $properties |
+Format-Table -AutoSize 
+#endregion 'quota templates'
+
 
 
 
