@@ -24,6 +24,7 @@
 . $PSScriptRoot\Get-SPAuditServicesOnServer.ps1
 . $PSScriptRoot\Get-SPAuditSharePointBuild.ps1
 . $PSScriptRoot\Get-SPAuditSharePointLicense.ps1
+. $PSScriptRoot\Get-SPAuditSiteCollectionsList.ps1
 . $PSScriptRoot\Get-SPAuditSiteTopology.ps1
 . $PSScriptRoot\Get-SPAuditTimeZoneById.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationDefaultQuotaTemplate.ps1
