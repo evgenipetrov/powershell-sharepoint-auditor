@@ -673,6 +673,44 @@ Select-Object -Property $properties |
 Format-Table -AutoSize
 #endregion 'IIS settings'
 
+#region 'object cache accounts
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+},
+@{
+  n = 'Super User Account'
+  e = {
+    $_.SuperUserAcount
+  }
+},
+@{
+  n = 'Has Full Control'
+  e = {
+    $_.SuperUserHasFullControl
+  }
+},
+@{
+  n = 'Super Reader Account'
+  e = {
+    $_.SuperReaderAcount
+  }
+},
+@{
+  n = 'Has Full Read'
+  e = {
+    $_.SuperReaderHasFullRead
+  }
+}
+
+Get-SPAuditObjectCacheAccounts |
+Select-Object -Property $properties |
+Format-Table -AutoSize
+#endregion 'object cache accounts
+
+
 
 
 
