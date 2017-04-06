@@ -581,6 +581,41 @@ Select-Object -Property $properties |
 Format-Table -AutoSize
 #endregion 'user policy'
 
+#region alternate access mappings
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+}, 
+@{
+  n = 'Internal Url'
+  e = {
+    $_.InternalUrl
+  }
+},
+@{
+  n = 'Zone'
+  e = {
+    $_.Zone
+  }
+},
+@{
+  n = 'Url'
+  e = {
+    $_.Url
+  }
+}
+Get-SPAuditAlternateAccessMappings |
+Select-Object -Property $properties |
+Format-Table -AutoSize
+
+
+
+
+
+#endregion alternate access mappings
+
 
 
 
