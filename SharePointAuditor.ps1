@@ -746,6 +746,50 @@ Select-Object -Property $properties |
 Format-Table -AutoSize 
 #endregion 'site collections list'
 
+#region 'site collection usage and properties'
+
+$properties = @{
+  n = 'Site Collection Title'
+  e = {
+    $_.Title
+  }
+},
+@{
+  n = 'Url'
+  e = {
+    $_.Url
+  }
+},
+@{
+  n = 'Language'
+  e = {
+    $_.Language
+  }
+},
+@{
+  n = 'Number of webs'
+  e = {
+    $_.WebsCount
+  }
+},
+@{
+  n = 'UI Version'
+  e = {
+    $_.UIVersion
+  }
+},
+@{
+  n = 'Storage[GB]'
+  e = {
+    $_.Storage/1GB -as [int]
+  }
+}
+
+Get-SPAuditSiteCollectionsUsageAndProperties |
+Select-Object -Property $properties |
+Format-Table -AutoSize 
+#endregion 'site collection usage and properties'
+
 
 
 
