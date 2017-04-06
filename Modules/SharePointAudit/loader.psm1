@@ -30,5 +30,6 @@
 . $PSScriptRoot\Get-SPAuditWebApplicationsFeatures.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationsManagedPaths.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationsResourceThrottling.ps1
+. $PSScriptRoot\Get-SPAuditWebApplicationUserPolicy.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationWebPartSecurity.ps1
 . $PSScriptRoot\Get-SPAuditWebApplicationWorkflowSettings.ps1

@@ -545,6 +545,43 @@ Select-Object -Property $properties|
 Format-Table -AutoSize
 #endregion 'web part security
 
+#region 'user policy'
+$properties = @{
+  n = 'Web Application'
+  e = {
+    $_.DisplayName
+  }
+}, 
+@{
+  n = 'User'
+  e = {
+    $_.UserDisplayName
+  }
+},
+@{
+  n = 'Username'
+  e = {
+    $_.Username
+  }
+},
+@{
+  n = 'Policy Role Bindings'
+  e = {
+    $_.PolicyRoleBindings
+  }
+},
+@{
+  n = 'SystemUser'
+  e = {
+    $_.SystemUser
+  }
+}
+Get-SPAuditWebApplicationUserPolicy |
+Select-Object -Property $properties |
+Format-Table -AutoSize
+#endregion 'user policy'
+
+
 
 
 
