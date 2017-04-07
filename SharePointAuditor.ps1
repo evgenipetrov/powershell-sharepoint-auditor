@@ -834,10 +834,56 @@ $properties = @{
   }
 }
 
-Get-SPAuditQuotaTemplates  |
+Get-SPAuditQuotaTemplates |
 Select-Object -Property $properties |
 Format-Table -AutoSize 
 #endregion 'quota templates'
+
+#region 'site collection quotas'
+$properties = @{
+  n = 'Site Collection'
+  e = {
+    $_.SiteCollection
+  }
+},
+@{
+  n = 'Url'
+  e = {
+    $_.Url
+  }
+},
+@{
+  n = 'Quota Name'
+  e = {
+    $_.QuotaName
+  }
+},
+@{
+  n = 'Lock Status'
+  e = {
+    $_.LockStatus
+  }
+},
+@{
+  n = 'Storage Maximum Level [MB]'
+  e = {
+    $_.StorageMaximumLevel/1MB -as [int]
+  }
+},
+@{
+  n = 'Storage Warning Level [MB]'
+  e = {($_.StorageWarningLevel/1MB -as [int]}
+},
+@{
+  n = 'Usage[MB]'
+  e = {
+    $_.Usage/1MB -as [int]
+  }
+}
+Get-SPAuditSiteCollectionsQuotas |
+Select-Object -Property $properties |
+Format-Table -AutoSize 
+#endregion 'site collection quotas'
 
 
 
